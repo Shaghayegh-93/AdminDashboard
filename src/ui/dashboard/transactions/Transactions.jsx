@@ -8,17 +8,17 @@ const Transactions = () => {
         Latest Transactions
       </h2>
       <table className="w-full ">
-        <thead className="">
-          <tr className="">
-            <th className="">Name</th>
+        <thead >
+          <tr >
+            <th >Name</th>
             <th>Status</th>
             <th>Date</th>
             <th>Amount</th>
           </tr>
         </thead>
-        <tbody className="">
-          <tr className="">
-            <td className="">
+        <tbody >
+          <tr >
+            <td>
               <div className="flex items-center gap-3 ">
                 <Image
                   width={40}
@@ -36,11 +36,11 @@ const Transactions = () => {
                 pending
               </span>
             </td>
-            <td className="">14.02.2023</td>
+            <td >14.02.2023</td>
             <td>$3.200</td>
           </tr>
-          <tr className="">
-            <td className="">
+          <tr >
+            <td >
               <div className="flex items-center gap-3 ">
                 <Image
                   width={40}
