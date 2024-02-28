@@ -28,7 +28,7 @@ const Sidebadr = () => {
         },
         {
           title: "Products",
-          path: "/dashboard/prducts",
+          path: "/dashboard/products",
           icon: <MdShoppingBag />,
         },
         {
@@ -67,17 +67,12 @@ const Sidebadr = () => {
           path: "/dashboard/reports",
           icon: <MdHelpCenter />,
         },
-        {
-          title: "Logout",
-          path: "/dashboard/teams",
-          icon: <MdLogout />,
-        },
       ],
     },
   ];
   const pathName = usePathname();
   return (
-    <div className="sticky top-10 h-full">
+    <div className="sticky top-10 min-h-screen">
       <div className="flex items-center gap-5 mb-4">
         <div className="rounded-full  relative size-16">
           <Image
@@ -113,6 +108,10 @@ const Sidebadr = () => {
             </ul>
           </div>
         ))}
+        <button className="flex items-center p-4 gap-2 hover:bg-[#2e374a]">
+          <MdLogout />
+          Logout
+        </button>
       </div>
     </div>
   );
