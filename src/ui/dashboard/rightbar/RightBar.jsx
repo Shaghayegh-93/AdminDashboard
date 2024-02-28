@@ -24,7 +24,7 @@ const RightBar = () => {
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid
           voluptatibus beatae consectetur blanditiis, iusto, disti
         </p>
-        <button className="border-none p-3 text-left flex items-center justify-center gap-1 bg-[#5d57c9] w-max rounded-2xl">
+        <button className="border-none p-3 text-left flex items-center justify-center gap-1 bg-btn w-max rounded-2xl">
           <MdPlayCircleFilled /> Watch
         </button>
       </div>
@@ -44,7 +44,7 @@ const RightBar = () => {
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid
           voluptatibus beatae consectetur blanditiis, iusto, disti
         </p>
-        <button className="p-3 border-none text-center justify-center flex items-center gap-1 bg-[#5d57c9] w-max rounded-2xl">
+        <button className="p-3 border-none text-center justify-center flex items-center gap-1 bg-btn w-max rounded-2xl">
           <MdReadMore /> Learn
         </button>
       </div>
