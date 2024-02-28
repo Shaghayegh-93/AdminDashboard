@@ -45,7 +45,7 @@ const AddProductPage = () => {
             className="bg-transparent bg-bg-color p-3 rounded-md border border-text-color-soft w-[45%]"
             type="text"
             placeholder="Color"
-            name="title"
+            name="colcor"
           />
           <input
             className="bg-transparent bg-bg-color p-3 rounded-md border border-text-color-soft w-[45%]"
