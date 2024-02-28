@@ -1,15 +1,18 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Search from "@/ui/dashboard/search/Search";
 import Pagination from "@/ui/dashboard/pagination/Pagination";
+import { useParams } from "next/navigation";
 
 const ProductsPage = () => {
+  const params = useParams();
   return (
     <div className="bg-bg-color-soft rounded-2xl p-5 mt-5">
       <div className="flex items-center justify-between mb-4">
         <Search placeholder="Search for a products" />
-        <Link href="/dashboard/users/products">
+        <Link href="/dashboard/products/add">
           <button className="p-3 w-max rounded-md text-text-color border-none bg-btn">
             Add New
           </button>
@@ -79,9 +82,11 @@ const ProductsPage = () => {
             <td>passive</td>
             <td>
               <div className="flex gap-3">
-                <button className="rounded-md w-20 px-3 py-2 text-text-color border-none bg-teal-600">
-                  View
-                </button>
+                <Link href={`/dashboard/products/${params.id}`}>
+                  <button className="rounded-md w-20 px-3 py-2 text-text-color border-none bg-teal-600">
+                    View
+                  </button>
+                </Link>
                 <button className="rounded-md w-20 px-3 py-2 text-text-color border-none bg-red-700">
                   Delete
                 </button>
