@@ -2,13 +2,14 @@
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import React from "react";
 import { MdSearch } from "react-icons/md";
+import { useDebounce } from "use-debounce";
 
 const Search = ({ placeholder }) => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  const searchHandler = (e) => {
+  const searchHandler = useDebouncedCallback((e) => {
     const params = new URLSearchParams(searchParams);
     if (e.target.value) {
       e.target.value.length > 2 && params.set("q", e.target.value);
@@ -16,7 +17,7 @@ const Search = ({ placeholder }) => {
       params.delete("q");
     }
     replace(`${pathname}?${params}`);
-  };
+  },300);
   return (
     <div>
       <div className="flex items-center bg-[#2e374a] p-3 gap-2 rounded-md cursor-pointer">
