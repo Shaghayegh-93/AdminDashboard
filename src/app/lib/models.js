@@ -1,7 +1,6 @@
-import { Mongoose } from "mongoose";
-import { MdCategory } from "react-icons/md";
+import mongoose from "mongoose";
 
-const userSchema = new Mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -40,7 +39,7 @@ const userSchema = new Mongoose.Schema(
   { timestamps: true }
 );
 
-const productSchema = new Mongoose.Schema(
+const productSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -77,6 +76,6 @@ const productSchema = new Mongoose.Schema(
   { timestamps: true }
 );
 
-export const User = Mongoose.models?.User || Mongoose.model("User", userSchema);
+export const User = mongoose.models?.User || mongoose.model("User", userSchema);
 export const Product =
-  Mongoose.models?.Product || Mongoose.model("Product", productSchema);
+  mongoose.models?.Product || mongoose.model("Product", productSchema);
