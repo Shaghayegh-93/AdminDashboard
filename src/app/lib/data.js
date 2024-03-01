@@ -16,6 +16,16 @@ export const fetchUsers = async (q, page) => {
     throw new Error("error");
   }
 };
+export const fetchSingleUser = async (id) => {
+  try {
+    connectTodb();
+    const user = await User.findById(id);
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw new Error("error");
+  }
+};
 
 export const fetchProducts = async (q, page) => {
   const regex = new RegExp(q, "i");
@@ -27,6 +37,17 @@ export const fetchProducts = async (q, page) => {
       .limit(ITEM_PER_PAGE)
       .skip(ITEM_PER_PAGE * (page - 1));
     return { products, count };
+  } catch (err) {
+    console.log(err);
+    throw new Error("error");
+  }
+};
+
+export const fetchSingleProduct = async (id) => {
+  try {
+    connectTodb();
+    const product = await Product.findById(id);
+    return product;
   } catch (err) {
     console.log(err);
     throw new Error("error");
