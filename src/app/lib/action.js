@@ -2,9 +2,9 @@
 import { revalidatePath } from "next/cache";
 import { Product, User } from "./models";
 import { connectTodb } from "./utils";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
-
+import { signIn } from "../auth";
 
 export const addUser = async (formData) => {
   console.log("formdata", formData);
@@ -24,8 +24,25 @@ export const addUser = async (formData) => {
   redirect("/dashboard/users");
 };
 
+export const updateUser = async (formData) => {
+  const data = Object.fromEntries(formData);
+  try {
+    connectTodb();
+    const updateFields = data;
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+    await User.findByIdAndUpdate(data.id, updateFields);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+  revalidatePath("/dashboard/users");
+  redirect("/dashboard/users");
+};
+
 export const deleteUser = async (formData) => {
-  console.log("formdata", formData);
   const { id } = Object.fromEntries(formData);
   try {
     connectTodb();
@@ -52,7 +69,24 @@ export const addProduct = async (formData) => {
   }
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");
-  //   toast.success("successs");
+};
+
+export const updateProduct = async (formData) => {
+  const data = Object.fromEntries(formData);
+  try {
+    connectTodb();
+    const updateFields = data;
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+    await Product.findByIdAndUpdate(data.id, updateFields);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+  revalidatePath("/dashboard/products");
+  redirect("/dashboard/products");
 };
 
 export const deleteProduct = async (formData) => {
@@ -66,4 +100,21 @@ export const deleteProduct = async (formData) => {
     throw new Error(error);
   }
   revalidatePath("/dashboard/products");
+};
+
+export const authenticate = async (prevState, formData) => {
+  const { password, username } = Object.fromEntries(formData);
+  try {
+    connectTodb();
+    await signIn("credentials", {
+      redirect: false,
+      username,
+      password,
+    });
+  } catch (err) {
+    if (err.message.includes("CredentialsSignin")) {
+      return "Wrong Credentials";
+    }
+    throw  new Error(err);
+  }
 };
