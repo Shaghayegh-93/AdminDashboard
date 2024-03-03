@@ -1,11 +1,11 @@
-"use client";
 import React from "react";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { fetchSingleUser } from "@/app/lib/data";
+import { updateUser } from "@/app/lib/action";
 
-const SingleUserPage = ({ params }) => {
-  //   const params = useParams();
-  console.log("params", params);
+const SingleUserPage = async ({ params }) => {
+  const { id } = params;
+  const user = await fetchSingleUser(id);
 
   return (
     <div className="flex basis-full gap-10 mt-5">
@@ -15,48 +15,49 @@ const SingleUserPage = ({ params }) => {
             className="  object-cover"
             fill
             alt="userIamge"
-            src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={user.img || "/noavatar.png"}
           />
         </div>
-        text
+        {user.username}
       </div>
 
       <div className="bg-bg-color-soft p-5 rounded-md basis-4/5">
-        <form className="flex flex-col gap-2  ">
+        <form action={updateUser} className="flex flex-col gap-2  ">
+          <input type="hidden" name="id" id="" value={user.id} />
           <label htmlFor="username">Username</label>
           <input
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
             type="text"
             name="username"
-            placeholder="Username"
+            placeholder={user.username}
           />
           <label htmlFor="email">Email</label>
           <input
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
             type="email"
             name="eail"
-            placeholder="example@gmail.com"
+            placeholder={user.email}
           />
           <label htmlFor="password">Password</label>
           <input
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder={user.password}
           />
           <label htmlFor="username">Phone</label>
           <input
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
             type="tel"
             name="phone"
-            placeholder="Phone"
+            placeholder={user.phone}
           />
           <label htmlFor="address">Address</label>
           <textarea
             name="address"
             id="adress"
             rows="5"
-            placeholder="Adress"
+            placeholder={user.address}
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
           />
 
@@ -64,28 +65,34 @@ const SingleUserPage = ({ params }) => {
           <select
             name="isAdmin"
             id="isAdmin"
-            placeholder="Choose a Category"
+            placeholder={user.isAdmin}
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
           >
-            <option value={false} selected>
-              Is Admin?
+            <option value={false}>Is Admin?</option>
+            <option value={true} selected={user.isAdmin}>
+              Yes
             </option>
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
+            <option value={false} selected={!user.isAdmin}>
+              No
+            </option>
           </select>
 
           <label htmlFor="address"> Is Active?</label>
           <select
             name="isActive"
             id="isActive"
-            placeholder="Choose a Category"
+            placeholder={user.isActive}
             className="bg-bg-color p-3 border border-text-color-soft outline-none w-full rounded-md"
           >
             <option value={true} selected>
               Is Active?
             </option>
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
+            <option value={true} selected={user.isActive}>
+              Yes
+            </option>
+            <option value={false} selected={!user.isActive}>
+              No
+            </option>
           </select>
           <button
             type="submit"
